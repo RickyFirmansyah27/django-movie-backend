@@ -13,7 +13,11 @@ def getMovies(request):
         query_params = request.GET.dict()
         print(query_params)
 
-        movies = movieService.getMovies(query_params)
+        result = movieService.getMovies(query_params)
+        movies = {
+            'total_data': result[0],
+            'movies': result[1]
+        }
 
         logger.info(f'[MoviesController] - Fetched movies successfully with params: {query_params}')
 

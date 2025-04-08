@@ -3,6 +3,7 @@ import json
 
 def get_all_movies(params):
     query = "SELECT * FROM movies"
+    query_count = "SELECT COUNT(*) FROM movies"
     
     where_clauses = []
     query_params = []
@@ -41,10 +42,12 @@ def get_all_movies(params):
     query += f" ORDER BY {sort_by} {sort_order}"
 
     page = int(params.get('page', 1))
-    size = int(params.get('size', 10))
+    size = int(params.get('size', 5))
     offset = (page - 1) * size
 
     query += " LIMIT %s OFFSET %s"
     query_params.extend([size, offset])
+    total_data = dbConnection.command_with_params(query_count, query_params)[0][0]
+    data = dbConnection.command_with_params(query, query_params)
 
-    return dbConnection.command_with_params(query, query_params)
+    return total_data, data

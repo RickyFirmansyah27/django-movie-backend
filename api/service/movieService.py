@@ -7,7 +7,7 @@ logger = logging.getLogger('info')
 def getMovies(params):
     logger.info(f'[MoviesService] - payload: {params}')
     try:
-        movies = dbQuery.get_all_movies(params)
+        total_data, movies = dbQuery.get_all_movies(params)
 
         movie_list = []
         for movie in movies:
@@ -25,7 +25,7 @@ def getMovies(params):
             movie_list.append(movie_dict)
 
         logger.info(f'[MoviesService] - end')
-        return movie_list
+        return total_data, movie_list
     except Exception as err:
         logger.info(f'[MoviesService] - erorr: {err}')
         raise Exception(f"Error fetching movies: {str(err)}")
