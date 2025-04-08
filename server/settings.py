@@ -34,7 +34,7 @@ ALLOWED_HOSTS = ['*', '*.verce.app']
 
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
+    '*.verce.app'
 ]
 
 # Application definition
