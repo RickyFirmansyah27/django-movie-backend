@@ -1,8 +1,13 @@
-from api.config.dbConnection import execute_sql_query
+from api.helper import dbQuery
+import logging
 
-def getMovies():
+# Configure logging
+logger = logging.getLogger('info')
+
+def getMovies(params):
+    logger.info(f'[MoviesService] - payload: {params}')
     try:
-        movies = execute_sql_query('SELECT * FROM movies')
+        movies = dbQuery.get_all_movies(params)
 
         movie_list = []
         for movie in movies:
@@ -19,6 +24,8 @@ def getMovies():
             }
             movie_list.append(movie_dict)
 
+        logger.info(f'[MoviesService] - end')
         return movie_list
     except Exception as err:
+        logger.info(f'[MoviesService] - erorr: {err}')
         raise Exception(f"Error fetching movies: {str(err)}")

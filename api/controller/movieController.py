@@ -10,12 +10,14 @@ logger = logging.getLogger('response')
 @api_view(['GET'])
 def getMovies(request):
     try:
-        # Data sampel
-        movies = movieService.getMovies()
+        query_params = request.GET.dict()
+        print(query_params)
 
-        logger.info(f'[MoviesController] - Fetched all movie successfully. {movies}')
+        movies = movieService.getMovies(query_params)
 
-        return BaseResponse('success', 'Successfully fetched sample movies', movies)
+        logger.info(f'[MoviesController] - Fetched movies successfully with params: {query_params}')
+
+        return BaseResponse('success', 'Successfully fetched movies', movies)
     except Exception as e:
-        logger.error('[MoviesController] - Failed to fetch sample movies.', exc_info=True)
-        return BaseResponse('error', 'Failed to fetch sample movies', str(e))
+        logger.error('[MoviesController] - Failed to fetch movies.', exc_info=True)
+        return BaseResponse('error', 'Failed to fetch movies', str(e))
