@@ -30,11 +30,11 @@ SECRET_KEY = 'django-insecure-to4&-*xoaq^0&x1wx%)$5sl=j11*newa@+xyakk-6i(1!+7f^6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*', '*.verce.app']
+ALLOWED_HOSTS = ['*', 'https://vite-movie-frontend.vercel.app']
 
 
 CORS_ALLOWED_ORIGINS = [
-    '*.verce.app'
+    'https://vite-movie-frontend.vercel.app'
 ]
 
 # Application definition
