@@ -3,5 +3,5 @@ from .views import home
 
 urlpatterns = [
     path('', home, name='home'),
-    path('api/movies/', include('api.routes.index')),
+    path('api/', include('api.routes.index')),
 ]
