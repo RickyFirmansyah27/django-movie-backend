@@ -17,9 +17,9 @@ def get_all_movies(params):
         where_clauses.append("duration::numeric >= %s")
         query_params.append(float(params['duration']))
 
-    if 'user_rating' in params:
-        where_clauses.append("(user_rating)::numeric >= %s")
-        query_params.append(float(params['user_rating']))
+    if 'userRating' in params:
+        where_clauses.append("(userRating)::numeric >= %s")
+        query_params.append(float(params['userRating']))
 
     if 'name' in params:
         where_clauses.append("name::text ILIKE %s")
@@ -35,7 +35,7 @@ def get_all_movies(params):
     sort_by = params.get('sort_by', 'id')
     sort_order = params.get('sort_order', 'ASC')
     
-    allowed_sort_fields = ['id', 'name', 'genre', 'duration', 'user_rating']
+    allowed_sort_fields = ['id', 'name', 'genre', 'duration', 'userRating']
     sort_by = sort_by if sort_by in allowed_sort_fields else 'id'
     sort_order = sort_order.upper() if sort_order.upper() in ['ASC', 'DESC'] else 'ASC'
     
